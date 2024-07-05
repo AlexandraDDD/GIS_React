@@ -47,7 +47,8 @@ export const MapBox = () => {
 
   return (
     <MapContainer
-      className="h-100 w-100"
+	style={{ height: '90vh', width: '100%' }}
+      
       center={[59.939, 30.316]}
       zoom={15}
       scrollWheelZoom={true}
