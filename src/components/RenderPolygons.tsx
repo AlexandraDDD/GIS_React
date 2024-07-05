@@ -7,6 +7,7 @@ interface Props {
   geoObjects: GeoObject[];
 }
 
+// отрисовка полигона GeoObject
 export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
   const polygonElements = geoObjects.map((geoObject) => (
     <LeafletPolygon
@@ -16,8 +17,8 @@ export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
       fillColor={getColor(geoObject.polygon)}
       fillOpacity={0.5}
     >
-      <Popup>{geoObject.name}</Popup>
-    </LeafletPolygon>
+      <Popup>{geoObject.name}</Popup> 
+    </LeafletPolygon> 
   ));
 
   return <>{polygonElements}</>;

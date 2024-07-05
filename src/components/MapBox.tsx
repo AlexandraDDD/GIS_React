@@ -4,46 +4,11 @@ import { MapPolygons } from "./MapPolygons";
 import { MapService } from "./MapService";
 import { RenderPolygons } from "./RenderPolygons";
 import { useAppSelector } from "../hooks";
-import { GeoObject } from "../models/geoObject";
+import { getGeoObjects } from "../data/geoObjectsData";
 
 export const MapBox = () => {
   const editor = useAppSelector((x) => x.editor);
-  const geoObjects: GeoObject[] = [
-    {
-      type: "geoObject",
-      name: "Polygon 1",
-      id: 1,
-      polygon: {
-        id: "1",
-        points: [
-          { id: "1", coordinates: [59.939, 30.316] },
-          { id: "2", coordinates: [59.939, 30.32] },
-          { id: "3", coordinates: [59.943, 30.32] },
-          { id: "4", coordinates: [59.943, 30.316] },
-          { id: "5", coordinates: [59.939, 30.316] },
-        ],
-        selected: false,
-      },
-      properties: {},
-    },
-    {
-      type: "geoObject",
-      name: "Polygon 2",
-      id: 2,
-      polygon: {
-        id: "2",
-        points: [
-          { id: "1", coordinates: [59.937, 30.318] },
-          { id: "2", coordinates: [59.937, 30.322] },
-          { id: "3", coordinates: [59.941, 30.322] },
-          { id: "4", coordinates: [59.941, 30.318] },
-          { id: "5", coordinates: [59.937, 30.318] },
-        ],
-        selected: false,
-      },
-      properties: {},
-    },
-  ];
+  const geoObjects = getGeoObjects(); // Добавляет все полигоны из /data/geoObjectsData.ts
 
   return (
     <MapContainer
@@ -61,7 +26,7 @@ export const MapBox = () => {
 
       <MapPoints />
 
-      {editor.isPolygonsVisible && <RenderPolygons geoObjects={geoObjects} />}
+      {editor.isPolygonsVisible && <RenderPolygons geoObjects={geoObjects} />} 
     </MapContainer>
   );
 };
