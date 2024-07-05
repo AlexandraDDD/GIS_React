@@ -81,7 +81,7 @@ export const CommandBar: FC = () => {
 	};
 
 	return (
-		<div className="container p-3 bg-light d-flex gap-4 align-items-center justify-content-between">
+		<div className="container p-3 bg-light d-flex  align-items-center justify-content-between">
 			<div className="d-flex gap-4 align-items-center">
 				<button
 					className="btn btn-outline-primary"
