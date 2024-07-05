@@ -1,21 +1,22 @@
 import { FC } from "react";
 import { Polygon as LeafletPolygon, Popup } from "react-leaflet";
 import { Polygon } from "../models/polygon";
+import { GeoObject } from "../models/geoObject";
 
 interface Props {
-  polygons: Polygon[];
+  geoObjects: GeoObject[];
 }
 
-export const RenderPolygons: FC<Props> = ({ polygons }) => {
-  const polygonElements = polygons.map((polygon) => (
+export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
+  const polygonElements = geoObjects.map((geoObject) => (
     <LeafletPolygon
-      key={polygon.id}
-      positions={polygon.points.map((point) => point.coordinates)}
-      color={getColor(polygon)}
-      fillColor={getColor(polygon)}
+      key={geoObject.id}
+      positions={geoObject.polygon.points.map((point) => point.coordinates)}
+      color={getColor(geoObject.polygon)}
+      fillColor={getColor(geoObject.polygon)}
       fillOpacity={0.5}
     >
-      <Popup>{polygon.id}</Popup>
+      <Popup>{geoObject.name}</Popup>
     </LeafletPolygon>
   ));
 
