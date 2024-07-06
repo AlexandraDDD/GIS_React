@@ -3,7 +3,7 @@ import { GeoObject } from "../models/geoObject";
 // Массив GeoObjects
 export const geoObjects: GeoObject[] = [
   {
-    type: "geoObject",
+    type: "BLDG",
     name: "Polygon 1",
     id: 1,
     polygon: {
@@ -19,7 +19,7 @@ export const geoObjects: GeoObject[] = [
     properties: {},
   },
   {
-    type: "geoObject",
+    type: "ADM",
     name: "Polygon 2",
     id: 2,
     polygon: {
@@ -35,7 +35,7 @@ export const geoObjects: GeoObject[] = [
     properties: {},
   },
   {
-    type: "geoObject",
+    type: "ADM",
     name: "Polygon 3",
     id: 3,
     polygon: {
@@ -45,6 +45,22 @@ export const geoObjects: GeoObject[] = [
         { id: "2", coordinates: [59.949, 30.33] },
         { id: "3", coordinates: [59.953, 30.33] },
         { id: "4", coordinates: [59.953, 30.326] },
+      ],
+      selected: false,
+    },
+    properties: {},
+  },
+  {
+    type: "geoObject",
+    name: "Polygon 4",
+    id: 3,
+    polygon: {
+      id: "3",
+      points: [
+        { id: "1", coordinates: [59.959, 30.326] },
+        { id: "2", coordinates: [59.959, 30.33] },
+        { id: "3", coordinates: [59.963, 30.33] },
+        { id: "4", coordinates: [59.963, 30.326] },
       ],
       selected: false,
     },
