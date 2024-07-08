@@ -6,6 +6,7 @@ import { useAppSelector } from "../hooks";
 import { getGeoObjects } from "../data/geoObjectsData";
 import { getMarkerObjects, markers } from "../data/markerData";
 import { GeoObject } from "../models/geoObject";
+import { MapPoints } from './MapPoints';
 
 interface MapBoxProps {
   filteredGeoObjects: GeoObject[];

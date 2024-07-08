@@ -13,7 +13,7 @@ function Clipper() {
 				</div>
 				<div className="h-100 flex-grow-1">
 
-					<MapBox points={true}/>
+					<MapBox points={true} filteredGeoObjects={[]}/>
 
 				</div>
 			</div>
