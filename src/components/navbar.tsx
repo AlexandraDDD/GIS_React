@@ -5,9 +5,9 @@ import { NavLink } from 'react-router-dom';
 
 function MyNavbar() {
   return (
-    <Navbar bg="light" >
+    <Navbar bg="light" style={{height: '7vh'}} >
       <Container>
-        <Navbar.Brand href="/">GIS 2024</Navbar.Brand>
+        <Navbar.Brand>GIS 2024</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

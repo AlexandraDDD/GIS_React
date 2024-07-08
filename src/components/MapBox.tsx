@@ -16,7 +16,7 @@ export const MapBox = ({points}:MapBoxProps) => {
 
   return (
     <MapContainer
-	style={{ height: '85vh', width: '100%' }}
+	style={{ height: '86vh', width: '100%' }}
       
       center={[59.939, 30.316]}
       zoom={15}

@@ -53,9 +53,9 @@ export const geoObjects: GeoObject[] = [
   {
     type: "geoObject",
     name: "Polygon 4",
-    id: 3,
+    id: 4,
     polygon: {
-      id: "3",
+      id: "4",
       points: [
         { id: "1", coordinates: [59.959, 30.326] },
         { id: "2", coordinates: [59.959, 30.33] },
