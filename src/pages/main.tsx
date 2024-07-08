@@ -22,7 +22,9 @@ function Main() {
       <Aspects onAspectChange={handleAspectChange} />
       <div className="flex-grow-1 d-flex overflow-hidden">
         <div className="h-100 flex-grow-1">
+
           <MapBox filteredGeoObjects={filteredGeoObjects} />
+            <MapBox points={false} />
         </div>
       </div>
     </div>
