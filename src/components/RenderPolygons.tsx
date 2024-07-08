@@ -1,8 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Polygon as LeafletPolygon, Popup } from "react-leaflet";
-import { Polygon } from "../models/polygon";
 import { GeoObject } from "../models/geoObject";
-import { geoObjects } from "../data/geoObjectsData";
+import Aspects from "./main/aspects";
 
 interface Props {
   geoObjects: GeoObject[];
@@ -10,19 +9,32 @@ interface Props {
 
 // отрисовка полигона GeoObject
 export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
-  const polygonElements = geoObjects.map((geoObject) => (
-    <LeafletPolygon
-      key={geoObject.id}
-      positions={geoObject.polygon.points.map((point) => point.coordinates)}
-      color={getColor(geoObject)}
-      fillColor={getColor(geoObject)}
-      fillOpacity={0.5}
-    >
-      <Popup>{geoObject.name}</Popup> 
-    </LeafletPolygon> 
-  ));
+  const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
 
-  return <>{polygonElements}</>;
+  const handleAspectChange = (aspect: string | null) => {
+    setSelectedAspect(aspect);
+  };
+
+  const filteredGeoObjects = selectedAspect
+    ? geoObjects.filter(geoObject => geoObject.type === selectedAspect)
+    : geoObjects;
+
+  return (
+    <>
+      <Aspects onAspectChange={handleAspectChange} />
+      {filteredGeoObjects.map((geoObject) => (
+        <LeafletPolygon
+          key={geoObject.id}
+          positions={geoObject.polygon.points.map((point) => point.coordinates)}
+          color={getColor(geoObject)}
+          fillColor={getColor(geoObject)}
+          fillOpacity={0.5}
+        >
+          <Popup>{geoObject.name}</Popup>
+        </LeafletPolygon>
+      ))}
+    </>
+  );
 };
 
 const getColor = (geoObject: GeoObject) => {
@@ -31,12 +43,10 @@ const getColor = (geoObject: GeoObject) => {
 
   if (geoObject.type === "ADM") {
     return colorsAdm[geoObject.id % colorsAdm.length];
-  }
-
-  if (geoObject.type === "BLDG") {
+  } else if (geoObject.type === "BLDG") {
     return colorsBldg[geoObject.id % colorsBldg.length];
   }
 
   // Можно добавить дополнительные условия для других типов объектов
   return "gray";
-} 
+};

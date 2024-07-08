@@ -1,33 +1,33 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { MapPoints } from "./MapPoints";
-import { MapPolygons } from "./MapPolygons";
-import { MapService } from "./MapService";
+import React, { useState, useEffect } from 'react';
+import { MapContainer, TileLayer } from "react-leaflet";
 import { RenderPolygons } from "./RenderPolygons";
 import { useAppSelector } from "../hooks";
 import { getGeoObjects } from "../data/geoObjectsData";
+import { GeoObject } from "../models/geoObject";
 
-export const MapBox = () => {
+interface MapBoxProps {
+  filteredGeoObjects: GeoObject[];
+}
+
+const MapBox: React.FC<MapBoxProps> = ({ filteredGeoObjects }) => {
   const editor = useAppSelector((x) => x.editor);
-  const geoObjects = getGeoObjects(); // Добавляет все полигоны из /data/geoObjectsData.ts
 
   return (
     <MapContainer
-	style={{ height: '90vh', width: '100%' }}
-      
+      style={{ height: '90vh', width: '100%' }}
       center={[59.939, 30.316]}
       zoom={15}
       scrollWheelZoom={true}
     >
-      <MapService />
-
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
-      <MapPoints />
-
-      {editor.isPolygonsVisible && <RenderPolygons geoObjects={geoObjects} />} 
+      {editor.isPolygonsVisible && (
+        <RenderPolygons geoObjects={filteredGeoObjects} />
+      )}
     </MapContainer>
   );
 };
+
+export default MapBox;
