@@ -12,7 +12,7 @@ function Clipper() {
 					<Properties />
 				</div>
 				<div className="h-100 flex-grow-1">
-					<MapBox />
+					<MapBox points={true}/>
 				</div>
 			</div>
 		</div>

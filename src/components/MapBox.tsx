@@ -6,13 +6,17 @@ import { RenderPolygons } from "./RenderPolygons";
 import { useAppSelector } from "../hooks";
 import { getGeoObjects } from "../data/geoObjectsData";
 
-export const MapBox = () => {
+interface MapBoxProps {
+  points?: boolean;
+}
+
+export const MapBox = ({points}:MapBoxProps) => {
   const editor = useAppSelector((x) => x.editor);
   const geoObjects = getGeoObjects(); // Добавляет все полигоны из /data/geoObjectsData.ts
 
   return (
     <MapContainer
-	style={{ height: '90vh', width: '100%' }}
+	style={{ height: '85vh', width: '100%' }}
       
       center={[59.939, 30.316]}
       zoom={15}
@@ -24,8 +28,8 @@ export const MapBox = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
-      <MapPoints />
+      { points === true ?  <MapPoints /> : null  }
+  
 
       {editor.isPolygonsVisible && <RenderPolygons geoObjects={geoObjects} />} 
     </MapContainer>
