@@ -3,8 +3,10 @@ import { MapPoints } from "./MapPoints";
 import { MapPolygons } from "./MapPolygons";
 import { MapService } from "./MapService";
 import { RenderPolygons } from "./RenderPolygons";
+import { RenderMarkers } from "./RenderMarkers";
 import { useAppSelector } from "../hooks";
 import { getGeoObjects } from "../data/geoObjectsData";
+import { getMarkerObjects, markers } from "../data/markerData";
 
 interface MapBoxProps {
   points?: boolean;
@@ -32,6 +34,7 @@ export const MapBox = ({points}:MapBoxProps) => {
   
 
       {editor.isPolygonsVisible && <RenderPolygons geoObjects={geoObjects} />} 
+      {<RenderMarkers markers={markers}/>}
     </MapContainer>
   );
 };
