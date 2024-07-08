@@ -5,18 +5,20 @@ import Aspects from "./main/aspects";
 
 interface Props {
   geoObjects: GeoObject[];
+  onAspectChange: (aspect: string | null) => void;
 }
 
 // отрисовка полигона GeoObject
-export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
+export const RenderPolygons: FC<Props> = ({ geoObjects, onAspectChange }) => {
   const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
 
   const handleAspectChange = (aspect: string | null) => {
     setSelectedAspect(aspect);
+    onAspectChange(aspect);
   };
 
   const filteredGeoObjects = selectedAspect
-    ? geoObjects.filter(geoObject => geoObject.type === selectedAspect)
+    ? geoObjects.filter((geoObject) => geoObject.type === selectedAspect)
     : geoObjects;
 
   return (
@@ -24,7 +26,7 @@ export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
       <Aspects onAspectChange={handleAspectChange} />
       {filteredGeoObjects.map((geoObject) => (
         <LeafletPolygon
-          key={geoObject.id}
+          key={`polygon-${geoObject.id}`}
           positions={geoObject.polygon.points.map((point) => point.coordinates)}
           color={getColor(geoObject)}
           fillColor={getColor(geoObject)}

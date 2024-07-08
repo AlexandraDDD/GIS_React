@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer } from "react-leaflet";
 import { RenderPolygons } from "./RenderPolygons";
 import { RenderMarkers } from "./RenderMarkers";
@@ -10,16 +10,21 @@ import { MapPoints } from './MapPoints';
 
 interface MapBoxProps {
   filteredGeoObjects: GeoObject[];
+  onAspectChange: (aspect: string | null) => void;
+  selectedAspect: string | null;
   points?: boolean;
 }
 
-const MapBox: React.FC<MapBoxProps> = ({ filteredGeoObjects }, {points}) => {
-
+const MapBox: React.FC<MapBoxProps> = ({
+  filteredGeoObjects,
+  onAspectChange,
+  selectedAspect,
+  points,
+}) => {
   const editor = useAppSelector((x) => x.editor);
 
   return (
     <MapContainer
-
       style={{ height: '90vh', width: '100%' }}
       center={[59.939, 30.316]}
       zoom={15}
@@ -30,12 +35,16 @@ const MapBox: React.FC<MapBoxProps> = ({ filteredGeoObjects }, {points}) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      { points === true ?  <MapPoints /> : null  }
+      {points === true ? <MapPoints /> : null}
       {editor.isPolygonsVisible && (
-        <RenderPolygons geoObjects={filteredGeoObjects} />
+        <><RenderPolygons
+        geoObjects={filteredGeoObjects}
+        onAspectChange={onAspectChange}
+      /><RenderMarkers markers={markers} selectedAspect={selectedAspect} /></>
       )}
-      {<RenderMarkers markers={markers}/>}
-
+      
+      
+      
     </MapContainer>
   );
 };

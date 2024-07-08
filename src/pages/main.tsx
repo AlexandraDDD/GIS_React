@@ -3,6 +3,7 @@ import MapBox from '../components/MapBox';
 import Aspects from '../components/main/aspects';
 import { GeoObject } from '../models/geoObject';
 import { geoObjects, getGeoObjects } from '../data/geoObjectsData';
+import { markers, getMarkerObjects } from '../data/markerData';
 
 function Main() {
   const [filteredGeoObjects, setFilteredGeoObjects] = useState<GeoObject[]>(geoObjects);
@@ -22,9 +23,12 @@ function Main() {
       <Aspects onAspectChange={handleAspectChange} />
       <div className="flex-grow-1 d-flex overflow-hidden">
         <div className="h-100 flex-grow-1">
-
-          <MapBox filteredGeoObjects={filteredGeoObjects} />
-            <MapBox points={false} filteredGeoObjects={[]} />
+          <MapBox
+            filteredGeoObjects={filteredGeoObjects}
+            onAspectChange={handleAspectChange}
+            selectedAspect={selectedAspect}
+            points
+          />
         </div>
       </div>
     </div>
