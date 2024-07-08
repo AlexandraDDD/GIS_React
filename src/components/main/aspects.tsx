@@ -1,36 +1,39 @@
-import React from 'react'
-import { Button, Container, Nav, Navbar } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Button, Container, Navbar } from 'react-bootstrap'
 
-function Aspects() {
-    const asp = [
-        {
-            id: 1,
-            name: 'Aspect1'
-        },
-        {
-            id: 2,
-            name: 'Aspect2'
-        },
-        {
-            id: 3,
-            name: 'Aspect3'
-        }
-    ]
+interface AspectsProps {
+    onAspectChange: (aspect: string | null) => void;
+}
 
+function Aspects({ onAspectChange }: AspectsProps) {
+    const aspects = [
+        { id: 1, name: 'ADM' },
+        { id: 2, name: 'BLDG' },
+        { id: 3, name: 'OTHER' }
+    ];
+
+    const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
+
+    const handleAspectClick = (aspect: string) => {
+        setSelectedAspect(aspect);
+        onAspectChange(aspect);
+    }
 
     return (
-        <Navbar bg="light" >
+        <Navbar bg="light">
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    {
-                        asp.map(aspect =>
-
-                            <Button style={{ marginRight: '10px' }}>{aspect.name}</Button>
-
-                        )
-                    }
+                    {aspects.map(aspect => (
+                        <Button
+                            key={aspect.id}
+                            style={{ marginRight: '10px' }}
+                            variant={selectedAspect === aspect.name ? 'primary' : 'outline-primary'}
+                            onClick={() => handleAspectClick(aspect.name)}
+                        >
+                            {aspect.name}
+                        </Button>
+                    ))}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
