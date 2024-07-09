@@ -3,6 +3,8 @@ import MapBox from '../components/MapBox';
 import { GeoObject } from '../models/geoObject';
 import { geoObjects, getGeoObjects } from '../data/geoObjectsData';
 import { markers, getMarkerObjects } from '../data/markerData';
+import { Button, Container, Navbar } from 'react-bootstrap';
+import { CommandBar } from '../components/CommandBar';
 
 function Clipper() {
   const [filteredGeoObjects, setFilteredGeoObjects] = useState<GeoObject[]>([]);
@@ -18,14 +20,16 @@ function Clipper() {
   };
 
   return (
+    
     <div className="w-100 h-100 d-flex flex-column overflow-hidden">
+      <CommandBar />
       <div className="flex-grow-1 d-flex overflow-hidden">
         <div className="h-100 flex-grow-1">
           <MapBox
             filteredGeoObjects={filteredGeoObjects}
             onAspectChange={handleAspectChange}
             selectedAspect={selectedAspect}
-            points
+            points={true}
           />
         </div>
       </div>

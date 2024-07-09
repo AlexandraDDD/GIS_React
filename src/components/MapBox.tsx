@@ -25,7 +25,7 @@ const MapBox: React.FC<MapBoxProps> = ({
 
   return (
     <MapContainer
-      style={{ height: '90vh', width: '100%' }}
+      style={{ height: '80vh', width: '100%' }}
       center={[59.939, 30.316]}
       zoom={15}
       scrollWheelZoom={true}
@@ -35,16 +35,13 @@ const MapBox: React.FC<MapBoxProps> = ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {points === true ? <MapPoints /> : null}
+      {points == true ? <MapPoints /> : null}
       {editor.isPolygonsVisible && (
         <><RenderPolygons
         geoObjects={filteredGeoObjects}
         onAspectChange={onAspectChange}
       /><RenderMarkers markers={markers} selectedAspect={selectedAspect} /></>
       )}
-      
-      
-      
     </MapContainer>
   );
 };

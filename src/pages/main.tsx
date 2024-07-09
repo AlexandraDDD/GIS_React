@@ -27,7 +27,7 @@ function Main() {
             filteredGeoObjects={filteredGeoObjects}
             onAspectChange={handleAspectChange}
             selectedAspect={selectedAspect}
-            points
+            points={false}
           />
         </div>
       </div>
