@@ -36,15 +36,16 @@ const MapBox: React.FC<MapBoxProps> = ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {points == true ? <MapPoints /> : null}
+      {points === true ? <MapPoints /> : null}
       {editor.isPolygonsVisible && (
         <><RenderPolygons
         geoObjects={filteredGeoObjects}
         onAspectChange={onAspectChange}
       /><RenderMarkers markers={markers} selectedAspect={selectedAspect} /></>
       )}
-
+      
       {editor.isPolygonsVisible && <MapPolygons />}
+      
     </MapContainer>
   );
 };
