@@ -50,14 +50,6 @@ export const CommandBar: FC = () => {
 		}
 	};
 
-	const handleUnionPolygons = () => {
-		send(union);
-	};
-
-	const handleIntersectPolygons = () => {
-		send(intersect);
-	};
-
 	const send = (method: (feature: Feature) => ReturnType<typeof union>) => {
 		method(buildFeatureCollection())
 			.unwrap()
@@ -113,7 +105,7 @@ export const CommandBar: FC = () => {
 				{
 					canCreatePolygon() && <button
 						className="btn btn-outline-primary"
-						onClick={() => dispatch(createPolygon())}
+						onClick={() => dispatch(createPolygon()) && dispatch(clearAllSelectedPoints())}
 					>
 						Создать полигон
 					</button>
@@ -124,24 +116,6 @@ export const CommandBar: FC = () => {
 				selectedPolygonsCount > 0 &&
 				<div className="font-italic">
 					Выбранные полигоны: {selectedPolygonsCount}
-				</div>
-			}
-
-			{
-				selectedPolygonsCount >= 2 &&
-				<div className="d-flex gap-3">
-					<button
-						className="btn btn-outline-secondary text-uppercase"
-						onClick={() => handleUnionPolygons()}
-					>
-						Объеденить
-					</button>
-					<button
-						className="btn btn-outline-secondary text-uppercase"
-						onClick={() => handleIntersectPolygons()}
-					>
-						Пересечь
-					</button>
 				</div>
 			}
 

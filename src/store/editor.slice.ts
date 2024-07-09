@@ -64,7 +64,7 @@ const editorSlice = createSlice({
 
 		createPolygon: (state) => {
 			const selectedPointIds = state.selectedPointIds;
-			const selectedPoints: Point[] = state.points;
+			const selectedPoints: Point[] = [];
 			selectedPointIds.forEach(selectedPointId => {
 				const point = state.points.find(point => point.id === selectedPointId);
 				if (!point) {
