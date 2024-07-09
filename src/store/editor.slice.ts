@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Point } from "../models/point";
 import { Polygon } from "../models/polygon";
 import { nanoid } from "nanoid";
+import { point } from "leaflet";
 
 export interface EditorState {
 	points: Point[];
@@ -63,7 +64,7 @@ const editorSlice = createSlice({
 
 		createPolygon: (state) => {
 			const selectedPointIds = state.selectedPointIds;
-			const selectedPoints: Point[] = [];
+			const selectedPoints: Point[] = state.points;
 			selectedPointIds.forEach(selectedPointId => {
 				const point = state.points.find(point => point.id === selectedPointId);
 				if (!point) {

@@ -7,6 +7,7 @@ import { getGeoObjects } from "../data/geoObjectsData";
 import { getMarkerObjects, markers } from "../data/markerData";
 import { GeoObject } from "../models/geoObject";
 import { MapPoints } from './MapPoints';
+import { MapPolygons } from './MapPolygons';
 
 interface MapBoxProps {
   filteredGeoObjects: GeoObject[];
@@ -42,6 +43,8 @@ const MapBox: React.FC<MapBoxProps> = ({
         onAspectChange={onAspectChange}
       /><RenderMarkers markers={markers} selectedAspect={selectedAspect} /></>
       )}
+
+      {editor.isPolygonsVisible && <MapPolygons />}
     </MapContainer>
   );
 };
