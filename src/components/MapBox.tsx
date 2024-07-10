@@ -28,7 +28,7 @@ const MapBox: React.FC<MapBoxProps> = ({
     <MapContainer
       style={{ height: '80vh', width: '100%' }}
       center={[59.939, 30.316]}
-      zoom={15}
+      zoom={13}
       scrollWheelZoom={true}
     >
       <TileLayer

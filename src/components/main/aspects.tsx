@@ -20,7 +20,7 @@ function Aspects({ onAspectChange }: AspectsProps) {
     }
 
     return (
-        <Navbar bg="light">
+        <Navbar bg="light" style={{ flex: 1 }}>
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

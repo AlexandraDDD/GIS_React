@@ -6,6 +6,7 @@ import { markers, getMarkerObjects } from '../data/markerData';
 import { Button, Container, Navbar } from 'react-bootstrap';
 import { CommandBar } from '../components/CommandBar';
 import { Properties } from '../components/Properties';
+import Aspects from '../components/main/aspects';
 
 function Clipper() {
   const [filteredGeoObjects, setFilteredGeoObjects] = useState<GeoObject[]>([]);
@@ -23,7 +24,10 @@ function Clipper() {
   return (
     
     <div className="w-100 h-100 d-flex flex-column">
+      <div style={{ display: 'flex' }}>
+      <Aspects onAspectChange={handleAspectChange} />
       <CommandBar />
+      </div>
       <div className="flex-grow-1 d-flex overflow-hidden">
         <div className="h-100">
           <Properties />
