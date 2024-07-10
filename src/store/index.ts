@@ -12,6 +12,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { overlaysApi } from "./overlays.api";
+import { geoObjects } from "../data/geoObjectsData";
+import selectedGeoObjectSlice from "./geoObject.slice";
 
 const persistConfig = {
 	key: 'root',
@@ -23,6 +25,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
 	editor: editorReducer,
+	selectedGeoObject: selectedGeoObjectSlice.reducer, // добавили слайс для хранения выбранного объекта
 	[overlaysApi.reducerPath]: overlaysApi.reducer,
 });
 
@@ -36,7 +39,7 @@ export const store = configureStore({
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
 		})
-			.concat(overlaysApi.middleware)
+			.concat(...Object.values(overlaysApi.middleware))
 	,
 });
 

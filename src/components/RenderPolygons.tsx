@@ -1,30 +1,39 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { Polygon as LeafletPolygon, Popup } from "react-leaflet";
 import { GeoObject } from "../models/geoObject";
 import Aspects from "./main/aspects";
+import { useDispatch } from "react-redux";
+import { SidebarContext } from "../context/SidebarContext";
+import { SetselectGeoObject } from "../store/geoObject.slice";
+import { Button } from "react-bootstrap";
 
 interface Props {
   geoObjects: GeoObject[];
-  onAspectChange: (aspect: string | null) => void;
 }
 
+
+
 // отрисовка полигона GeoObject
-export const RenderPolygons: FC<Props> = ({ geoObjects, onAspectChange }) => {
+export const RenderPolygons: FC<Props> = ({ geoObjects }) => {
   const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
+  //sidebar//
+  const dispatch = useDispatch();
 
-  const handleAspectChange = (aspect: string | null) => {
-    setSelectedAspect(aspect);
-    onAspectChange(aspect);
-  };
+  const { isSidebarOpen, handleOpenSidebar, handleCloseSidebar } = useContext(SidebarContext);
 
-  const filteredGeoObjects = selectedAspect
-    ? geoObjects.filter((geoObject) => geoObject.type === selectedAspect)
-    : geoObjects;
+  const handleMarkerClick = (geoObjectId: number) => {
+    dispatch(SetselectGeoObject(geoObjectId));
+    handleOpenSidebar()
+    console.log('handle');
+    console.log(isSidebarOpen);
+  }
+
+
 
   return (
     <>
-      <Aspects onAspectChange={handleAspectChange} />
-      {filteredGeoObjects.map((geoObject) => (
+      {/*   <Aspects onAspectChange={handleAspectChange} /> */}
+      {geoObjects.map((geoObject) => (
         <LeafletPolygon
           key={`polygon-${geoObject.id}`}
           positions={geoObject.polygon.points.map((point) => point.coordinates)}
@@ -32,7 +41,14 @@ export const RenderPolygons: FC<Props> = ({ geoObjects, onAspectChange }) => {
           fillColor={getColor(geoObject)}
           fillOpacity={0.5}
         >
-          <Popup>{geoObject.name}</Popup>
+
+          <Popup>
+            <div className="d-flex flex-column">
+              <h6 className="pb-2">  {geoObject.name} </h6>
+              <Button onClick={() => handleMarkerClick(geoObject.id)}>show info</Button>
+            </div>
+          </Popup>
+
         </LeafletPolygon>
       ))}
     </>

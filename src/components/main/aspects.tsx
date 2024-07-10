@@ -3,33 +3,36 @@ import { Button, Container, Navbar } from 'react-bootstrap'
 
 interface AspectsProps {
     onAspectChange: (aspect: string | null) => void;
+    onAll: () => void;
+    selectedAspect:(string|null);
 }
 
-function Aspects({ onAspectChange }: AspectsProps) {
+function Aspects({selectedAspect, onAspectChange, onAll }: AspectsProps) {
     const aspects = [
         { id: 1, name: 'ADM' },
         { id: 2, name: 'BLDG' },
         { id: 3, name: 'OTHER' }
     ];
 
-    const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
-
-    const handleAspectClick = (aspect: string) => {
-        setSelectedAspect(aspect);
-        onAspectChange(aspect);
-    }
+   
 
     return (
-        <Navbar bg="light" style={{ flex: 1 }}>
+        <Navbar bg="light" style={{ height: '7vh' }} >
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                    <Button
+                       style={{ marginRight: '10px' }}
+                    onClick={() => onAll()} 
+                    >
+                       ALL
+                    </Button>
                     {aspects.map(aspect => (
                         <Button
                             key={aspect.id}
                             style={{ marginRight: '10px' }}
                             variant={selectedAspect === aspect.name ? 'primary' : 'outline-primary'}
-                            onClick={() => handleAspectClick(aspect.name)}
+                            onClick={() => onAspectChange(aspect.name)}
                         >
                             {aspect.name}
                         </Button>

@@ -25,7 +25,7 @@ function Clipper() {
     
     <div className="w-100 h-100 d-flex flex-column">
       <div style={{ display: 'flex' }}>
-      <Aspects onAspectChange={handleAspectChange} />
+   {/*    <Aspects onAspectChange={handleAspectChange} /> */}
       <CommandBar />
       </div>
       <div className="flex-grow-1 d-flex overflow-hidden">
