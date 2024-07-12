@@ -1,6 +1,6 @@
 import { Polygon, Popup, useMap } from "react-leaflet";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { removePolygon, togglePolygonSelected, clearAllPoints } from "../store/editor.slice";
+import { removePolygon, togglePolygonSelected, clearAllPoints, createGeoObject } from "../store/editor.slice";
 
 const greenOptions = { fillColor: 'green' };
 const redOptions = { fillColor: 'red' };
@@ -48,7 +48,7 @@ export const MapPolygons = () => {
 										className="btn btn-outline-success"
 										onClick={(e) => {
 											e.stopPropagation();
-											//return dispatch();
+											return dispatch(createGeoObject(x));
 										}}>
 										Сохранить
 									</button>

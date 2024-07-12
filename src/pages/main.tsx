@@ -8,31 +8,36 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { SidebarContext } from '../context/SidebarContext';
 import Sidebar from '../components/main/sidebar/sidebar';
+import { useAppSelector } from "../hooks";
 
 function Main() {
   //aspects//
-  const [filteredGeoObjects, setFilteredGeoObjects] = useState<GeoObject[]>(geoObjects);
+  const editor = useAppSelector((x) => x.editor);
+  //editor.geoObject=[];
+  const fullGeoObjects = editor.geoObject.concat(getGeoObjects());
+  //const fullGeoObjects = getGeoObjects();
+  const [filteredGeoObjects, setFilteredGeoObjects] = useState<GeoObject[]>(fullGeoObjects);
   const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
 
   const handleAspectChange = (aspect: string | null) => {
     setSelectedAspect(aspect);
     if (aspect) {
-      setFilteredGeoObjects(geoObjects.filter(geoObject => geoObject.type === aspect));
+      setFilteredGeoObjects(fullGeoObjects.filter(geoObject => geoObject.type === aspect));
     } else {
-      setFilteredGeoObjects(geoObjects);
+      setFilteredGeoObjects(fullGeoObjects);
     }
   };
 
   //all
   const onAll =() =>{
-    setFilteredGeoObjects(geoObjects);
+    setFilteredGeoObjects(fullGeoObjects);
     setSelectedAspect(null)
   }
  //aspects end//
 
   //SIDEBAR
   const selectedGeoObjectId = useSelector((state: RootState) => state.selectedGeoObject.selectedGeoObjectId);
-  const selectedGeoObject = geoObjects.find((geoObject) => geoObject.id === selectedGeoObjectId);
+  const selectedGeoObject = fullGeoObjects.find((geoObject) => geoObject.id === selectedGeoObjectId);
   const { isSidebarOpen, handleOpenSidebar, handleCloseSidebar } = useContext(SidebarContext);
   //SIDEBAR end
 

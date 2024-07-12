@@ -3,11 +3,14 @@ import { Point } from "../models/point";
 import { Polygon } from "../models/polygon";
 import { nanoid } from "nanoid";
 import { point } from "leaflet";
+import { GeoObject } from "../models/geoObject";
+import { geoObjects } from "../data/geoObjectsData";
 
 export interface EditorState {
 	points: Point[];
 	selectedPointIds: string[];
 	polygons: Polygon[];
+	geoObject: GeoObject[];
 	isPolygonsVisible: boolean;
 };
 
@@ -15,6 +18,7 @@ const initialState: EditorState = {
 	points: [],
 	selectedPointIds: [],
 	polygons: [],
+	geoObject: [],
 	isPolygonsVisible: true,
 };
 
@@ -92,6 +96,7 @@ const editorSlice = createSlice({
 
 			const index = state.polygons.indexOf(polygon);
 			state.polygons.splice(index, 1);
+			state.geoObject.splice(index,1);
 		},
 		togglePolygonSelected: (state, action: PayloadAction<Polygon>) => {
 			const polygon = state.polygons.find(x => x.id === action.payload.id);
@@ -124,6 +129,22 @@ const editorSlice = createSlice({
 		togglePolygonsVisible: (state) => {
 			state.isPolygonsVisible = !state.isPolygonsVisible;
 		},
+		createGeoObject: (state, action: PayloadAction<Polygon>) => {
+			const polygon = state.polygons.find(x => x.id === action.payload.id);
+			if (!polygon) {
+			  throw new Error("Polygon is not found");
+			}
+			if (!state.geoObject) {
+				state.geoObject = [];
+			}
+			state.geoObject.push({
+			  type: "ADM",
+			  name: "POL",
+			  id: Number(polygon.id),
+			  polygon: polygon,
+			  properties: {},
+			});
+		}, 
 	}
 });
 
@@ -140,5 +161,6 @@ export const {
 	changePointCoordinates,
 	clearAllSelectedPoints,
 	togglePolygonsVisible,
+	createGeoObject,
 } = editorSlice.actions;
 export const { reducer: editorReducer, reducerPath: editorReducerPath } = editorSlice; 

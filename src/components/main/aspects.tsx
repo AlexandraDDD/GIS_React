@@ -17,7 +17,7 @@ function Aspects({selectedAspect, onAspectChange, onAll }: AspectsProps) {
    
 
     return (
-        <Navbar bg="light" style={{ height: '7vh' }} >
+        <Navbar bg="light" style={{ height: '12vh' }} >
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

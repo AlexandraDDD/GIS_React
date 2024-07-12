@@ -26,7 +26,7 @@ const MapBox: React.FC<MapBoxProps> = ({
 
   return (
     <MapContainer
-      style={{ height: '86vh', width: '100%' }}
+      style={{ height: '81vh', width: '100%' }}
       center={[59.939, 30.316]}
       zoom={13}
       scrollWheelZoom={true}
@@ -48,8 +48,6 @@ const MapBox: React.FC<MapBoxProps> = ({
           
           <RenderMarkers markers={markers} selectedAspect={selectedAspect} /></>
       )}
-
-    
 
     </MapContainer>
   );

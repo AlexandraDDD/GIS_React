@@ -68,7 +68,6 @@ export const geoObjects: GeoObject[] = [
   },
 ];
 
-
 // Ф-ция отправляющая данные о GeoObject
 export const getGeoObjects = (): GeoObject[] => {
     return geoObjects;
