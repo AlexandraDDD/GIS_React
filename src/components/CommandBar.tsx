@@ -73,7 +73,7 @@ export const CommandBar: FC = () => {
 	};
 
 	return (
-		<div className="p-3 bg-light d-flex align-items-center justify-content-between" style={{ flex: 3 }}>
+		<div className="p-3 bg-light d-flex align-items-center justify-content-between" style={{ flex: 3, height: '7vh' }}>
 			<div className="d-flex gap-4 align-items-center">
 				<button
 					className="btn btn-outline-primary"
