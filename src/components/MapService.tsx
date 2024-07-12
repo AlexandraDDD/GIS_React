@@ -12,7 +12,10 @@ let instance: Map | undefined;
 
 export const MapService: FC = () => {
   const editor = useAppSelector((x) => x.editor);
-  const geoObjects = editor.geoObject.concat(getGeoObjects());
+  
+    const geoObjects = editor?.geoObjects?.concat(getGeoObjects()) || getGeoObjects();
+   
+  
   const [selectedAspect, setSelectedAspect] = useState<string | null>(null);
   const map = useMap();
 

@@ -10,7 +10,7 @@ export interface EditorState {
 	points: Point[];
 	selectedPointIds: string[];
 	polygons: Polygon[];
-	geoObject: GeoObject[];
+	geoObjects: GeoObject[];
 	isPolygonsVisible: boolean;
 };
 
@@ -18,7 +18,7 @@ const initialState: EditorState = {
 	points: [],
 	selectedPointIds: [],
 	polygons: [],
-	geoObject: [],
+	geoObjects: [],
 	isPolygonsVisible: true,
 };
 
@@ -96,7 +96,7 @@ const editorSlice = createSlice({
 
 			const index = state.polygons.indexOf(polygon);
 			state.polygons.splice(index, 1);
-			state.geoObject.splice(index,1);
+			state.geoObjects.splice(index,1);
 		},
 		togglePolygonSelected: (state, action: PayloadAction<Polygon>) => {
 			const polygon = state.polygons.find(x => x.id === action.payload.id);
@@ -134,10 +134,10 @@ const editorSlice = createSlice({
 			if (!polygon) {
 			  throw new Error("Polygon is not found");
 			}
-			if (!state.geoObject) {
-				state.geoObject = [];
+			if (!state.geoObjects) {
+				state.geoObjects = [];
 			}
-			state.geoObject.push({
+			state.geoObjects.push({
 			  type: "ADM",
 			  name: "POL",
 			  id: Number(polygon.id),

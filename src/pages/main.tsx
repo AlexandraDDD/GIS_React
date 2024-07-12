@@ -14,7 +14,7 @@ function Main() {
   //aspects//
   const editor = useAppSelector((x) => x.editor);
   //editor.geoObject=[];
-  const fullGeoObjects = editor.geoObject.concat(getGeoObjects());
+  const fullGeoObjects = editor?.geoObjects?.concat(getGeoObjects()) || getGeoObjects();
   //const fullGeoObjects = getGeoObjects();
   const [filteredGeoObjects, setFilteredGeoObjects] = useState<GeoObject[]>(fullGeoObjects);
   const [selectedAspect, setSelectedAspect] = useState<string | null>(null);

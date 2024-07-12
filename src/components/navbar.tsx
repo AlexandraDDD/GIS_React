@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 function MyNavbar() {
   return (
-    <Navbar bg="light" style={{height: '7vh'}} >
+    <Navbar bg="light" style={{height: '6vh'}} >
       <Container>
         <Navbar.Brand>GIS 2024</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
